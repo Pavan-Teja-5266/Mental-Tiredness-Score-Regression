@@ -1,0 +1,44 @@
+# ---------------------------------------------------------------
+# Global settings for Mental Tiredness Score Prediction pipeline
+# ---------------------------------------------------------------
+test_size: 0.3
+random_state: 42
+cv_folds: 5
+n_trials: 20
+experiment_name: MENTAL_TIREDNESS_DVC_Pipeline
+
+# ---------------------------------------------------------------
+# Automated multi-criteria champion selection (regression / RMSE)
+# ---------------------------------------------------------------
+selection:
+  # Rule 1 - hard filter: (validation RMSE - train RMSE), in score points,
+  # must be STRICTLY below this value to avoid overfitting.
+  max_rmse_gap: 1.0
+
+  # Rule 2 - validation RMSE is the primary criterion (lower is better).
+  # Eligible models within this many RMSE points of the best eligible
+  # validation RMSE are treated as equally accurate "finalists".
+  rmse_tolerance: 0.25
+
+  # Rules 3-5 - among finalists, lower is better. Each criterion is
+  # min-max normalised across finalists (0 = best, 1 = worst) and combined
+  # with these weights. Order of importance: size > train time > predict time.
+  weights:
+    model_size_mb: 0.4
+    training_time_seconds: 0.3
+    prediction_time_ms: 0.3
+
+  # If NO model passes the gap rule: "smallest_gap" picks the model with the
+  # smallest RMSE gap (and logs a warning); "error" stops the pipeline.
+  fallback_if_none_eligible: smallest_gap
+
+  # Search objective: trials whose CV train/val RMSE gap is >= the threshold
+  # are penalised so Optuna steers toward low-overfitting configurations.
+  gap_penalty_in_search: true
+  gap_penalty_weight: 1.0
+
+# Timing measurement settings
+measurement:
+  training_time_repeats: 3        # final fit repeated N times, median reported
+  prediction_n_samples: 50        # single-row predictions per repetition
+  prediction_repeats: 5           # repetitions, median reported

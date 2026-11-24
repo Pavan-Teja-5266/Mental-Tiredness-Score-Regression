@@ -1,0 +1,42 @@
+artifact_path: file:///E:/Project/mlruns/1/models/m-fff2d5863d67408c8d54dafcf4a01041/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.9
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.9.1
+    skops_trusted_types: null
+is_signature_from_type_hint: false
+mlflow_version: 3.18.0
+model_id: m-fff2d5863d67408c8d54dafcf4a01041
+model_size_bytes: 2404255
+model_uuid: m-fff2d5863d67408c8d54dafcf4a01041
+prompts: null
+run_id: 8446f0b449034882afe85f26455fb7fd
+signature:
+  inputs: '[{"type": "long", "name": "number_of_decisions_made", "required": true},
+    {"type": "long", "name": "context_switch_count", "required": true}, {"type": "long",
+    "name": "notifications_received", "required": true}, {"type": "double", "name":
+    "screen_time_min", "required": true}, {"type": "double", "name": "deep_work_min",
+    "required": true}, {"type": "double", "name": "task_complexity_avg", "required":
+    true}, {"type": "double", "name": "caffeine_mg", "required": true}, {"type": "long",
+    "name": "break_frequency", "required": true}, {"type": "double", "name": "sleep_hours",
+    "required": true}, {"type": "double", "name": "deep_sleep_pct", "required": true},
+    {"type": "double", "name": "hydration_l", "required": true}, {"type": "string",
+    "name": "mood", "required": true}, {"type": "string", "name": "work_type", "required":
+    true}, {"type": "string", "name": "work_environment", "required": true}, {"type":
+    "double", "name": "noise_level_db", "required": true}, {"type": "double", "name":
+    "temperature_c", "required": true}, {"type": "double", "name": "workload_score",
+    "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2026-11-23 06:39:24.108715'
